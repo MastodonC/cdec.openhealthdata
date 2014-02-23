@@ -50,8 +50,7 @@
                        2 ?ccgcode})
       (ops/sum ?population :> ?total_population)
       (ops/sum ?area :> ?total_area)
-      (div ?total_population ?total_area :> ?density)
-      ))
+      (div ?total_population ?total_area :> ?density)))
 
 #_(?- (hfs-delimited "./output/ccg-density" :sinkmode :replace)
       (population-density-ccg
