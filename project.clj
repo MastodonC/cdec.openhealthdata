@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.logging "0.2.6"]
+                 [org.clojure/data.csv "0.1.2"]
                  [cascalog "1.10.1"]
                  [org.clojure/math.numeric-tower "0.0.2"]
                  [cascalog-math "0.1.0"]
