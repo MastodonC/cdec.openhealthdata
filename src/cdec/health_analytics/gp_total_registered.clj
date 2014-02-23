@@ -6,8 +6,7 @@
             [clojure.string :as s]
             [clojure.java.io :as io]
             [cdec.health-analytics.transform-load :as tl]
-            [clojure.tools.logging :refer [infof errorf]]
-            ))
+            [clojure.tools.logging :refer [infof errorf]]))
 
 (defn scrub-number [num]
   (s/replace num #"," ""))
@@ -16,8 +15,7 @@
   (<- [?gp-code ?total]      (input ?line)
       (tl/data-line? ?line)
       (tl/split-line ?line :#> 36 {4 ?gp-code 6 ?total-dirty})
-      (scrub-number ?total-dirty :> ?total)
-      ))
+      (scrub-number ?total-dirty :> ?total)))
 
 #_(let [data-in "./input/PRACTICE_LIST_AGE_GENDER_BREAKDOWN2.csv"
         data-out "./output/gp_total_registered/"]
