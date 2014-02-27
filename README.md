@@ -10,6 +10,6 @@ or fire up your clojure repl. We prefer emacs for that.
 
 ## License
 
-Copyright © 2013 Mastodon C
+Copyright © 2014 Connected Digital Economy Catapult
 
 Distributed under the Apache v2 License
