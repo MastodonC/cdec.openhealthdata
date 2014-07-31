@@ -1,3 +1,4 @@
+
 var borough_scores_map = function borough_scores_map(div) {
 
     var map = L.map(div).setView([53.0, -1.5], 6);
@@ -48,6 +49,13 @@ var borough_scores_map = function borough_scores_map(div) {
         });
     };
 
+    var format_number = function format_number(rank) {
+        if (rank == 'NA') {
+            return 'NA';
+        }
+        return numeral(rank).format('0,0.00');
+    };
+
     L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
             attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery.'
@@ -60,20 +68,25 @@ var borough_scores_map = function borough_scores_map(div) {
     addLegend([-134, -84, -34, 16, 66, 116, 166], map, color);
 
     addInfo(map, function (props) {
-        var infoBox = '<h4>' + props.LA_name + '</h4>' +
-            'Borough Code:</th>' + props.LA_code + '<br />' +
-            'Overall Rank: ' + numeral(props.overall_rank).format('0,0.00') + '<br />' +
-            'Cycling Weekly: ' + numeral(props.cycling_weekly).format('0,0.00') + '<br />' +
-            'Cycling Rank: ' + props.cycling_rank + '<br />' +
-            'Walking Thriceweekly: ' + props.walking_thriceweekly + '<br />' +
-            'Walking Rank: ' + props.walking_rank + '<br />' +
-            'Weekly Greenspace Vists: ' + numeral(props.weekly_greenspace_visits).format('0,0.00') + '<br />' +
-            'Greenspace Rank: ' + props.greenspace_rank + '<br />' +
-            'Hospital Experience Score: ' + props.hospital_experience_score + '<br />' +
-            'Hospital Rank: ' + props.hospital_rank + '<br />' +
-            'Can See GP: ' + numeral(100*props.pct_canseegp).format('0,') + '%<br />' +
-            'Dentists per 1000: ' + numeral(props.dentists_per_thousand).format('0,0.00') + '<br />' +
-            'Dentists Rank: ' + props.dentists_rank + '<br />';
+        var infoBox = '<div class="span3"><h4>' + props.LA_name + '</h4>' +
+                '<table class="table table-condensed">' +
+                '<tr class="active"><th>Overall Rank</th><td><strong>' + format_number(props.overall_rank) + '</strong></td></tr>' +
+                '<tr><th>Cycling Rank</th><td>' + format_number(props.cycling_rank) + '</td></tr>' +
+                '<tr><th>Walking Rank</th><td>' + format_number(props.walking_rank) + '</td></tr>' +
+                '<tr><th>Greenspace Rank</th><td>' + format_number(props.greenspace_rank) + '</td></tr>' +
+                '<tr><th>Hospital Rank</th><td>' + format_number(props.hospital_rank) + '</td></tr>' +
+                '<tr><th>Dentists Rank</th><td>' + format_number(props.dentists_rank) + '</td></tr>' +
+                '</table>' +
+                '<table class="table table-condensed">' +
+                '<tr><th>Cycling Weekly</th><td>' + format_number(props.cycling_weekly) + '</td></tr>' +
+                '<tr><th>Walking Thriceweekly</th><td>' + props.walking_thriceweekly + '</td></tr>' +
+                '<tr><th>Weekly Greenspace Visits</th><td>' + format_number(props.weekly_greenspace_visits) + '</td></tr>' +
+                '<tr><th>Hospital Experience Score</th><td>' + props.hospital_experience_score + '</td></tr>' +
+                '<tr><th>Can See GP</th><td>' + numeral(100*props.pct_canseegp).format('0,') + '%</td></tr>' +
+                '<tr><th>Dentists per 1000</th><td>' + format_number(props.dentists_per_thousand) + '</td></tr>' +
+                '</table>' +
+                '<i>' + props.LA_code + '</i></div>';
+
         return infoBox;
     });
 
