@@ -13,3 +13,7 @@ or fire up your clojure repl. We prefer emacs for that.
 Copyright © 2014 Connected Digital Economy Catapult
 
 Distributed under the Apache v2 License
+
+## Comments
+
+This repository contains the code for the basic Toothpick health scoring visualisation. 
