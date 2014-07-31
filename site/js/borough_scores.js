@@ -92,12 +92,12 @@ var borough_scores_map = function borough_scores_map(div) {
 
     function highlightFeature(e) {
         var layer = e.target;
-
         layer.setStyle({
-            weight: 5,
             color: '#666666',
-            dashArray: '',
-            fillOpacity: 0.6
+            weight: 2,
+            opacity: 0.7,
+            dashArray: '0',
+            fillOpacity: 0.7
         });
 
         if (!L.Browser.ie && !L.Browser.opera) {
