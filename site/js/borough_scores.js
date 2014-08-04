@@ -15,9 +15,9 @@ var borough_scores_map = function borough_scores_map(div) {
         return {
             fillColor: color(feature.properties.overall_rank),
             weight: 1,
-            opacity: 0,
             dashArray: '3',
-            fillOpacity: 0.8
+            opacity: 0,
+            fillOpacity: 0.4
         };
     };
     var defaultStyle = function defaultstyle(feature) {
@@ -37,7 +37,7 @@ var borough_scores_map = function borough_scores_map(div) {
             color: "#000",
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.8
+            fillOpacity: 0.4
         });
     };
     var onEachFeature = function onEachFeature(feature, layer) {
