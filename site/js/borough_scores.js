@@ -3,7 +3,6 @@ var borough_scores_map = function borough_scores_map(div) {
 
     var map = L.map(div).setView([53.0, -1.5], 6);
     var color = function getColor(d) {
-        console.log("D:" + d);
         switch (d) {
             case 'A': return '#0C2C84' ;;
             case 'B': return '#225EA8' ;;
@@ -73,23 +72,23 @@ var borough_scores_map = function borough_scores_map(div) {
 
     addInfo(map, function (props) {
         var infoBox = '<div class="span3"><h4>' + props.LA_name + '</h4>' +
-                '<table class="table table-condensed">' +
-                '<tr class="active"><th>Overall Rank</th><td><strong>' + format_number(props.overall_rank) + '</strong></td></tr>' +
-                '<tr><th>Cycling Rank</th><td>' + format_number(props.cycling_rank) + '</td></tr>' +
-                '<tr><th>Walking Rank</th><td>' + format_number(props.walking_rank) + '</td></tr>' +
-                '<tr><th>Greenspace Rank</th><td>' + format_number(props.greenspace_rank) + '</td></tr>' +
-                '<tr><th>Hospital Rank</th><td>' + format_number(props.hospital_rank) + '</td></tr>' +
-                '<tr><th>Dentists Rank</th><td>' + format_number(props.dentists_rank) + '</td></tr>' +
+                '<table class="table table-extra-condensed table-striped">' +
+                '<tr class="active"><th>Overall Rank</th><td class="text-right"><strong>' + format_number(props.overall_rank) + '</strong></td></tr>' +
+                '<tr><th>Cycling Rank</th><td class="text-right">' + format_number(props.cycling_rank) + '</td></tr>' +
+                '<tr><th>Walking Rank</th><td class="text-right">' + format_number(props.walking_rank) + '</td></tr>' +
+                '<tr><th>Greenspace Rank</th><td class="text-right">' + format_number(props.greenspace_rank) + '</td></tr>' +
+                '<tr><th>Hospital Rank</th><td class="text-right">' + format_number(props.hospital_rank) + '</td></tr>' +
+                '<tr><th>Dentists Rank</th><td class="text-right">' + format_number(props.dentists_rank) + '</td></tr>' +
                 '</table>' +
-                '<table class="table table-condensed">' +
-                '<tr><th>Cycling Weekly</th><td>' + format_number(props.cycling_weekly) + '</td></tr>' +
-                '<tr><th>Walking Thriceweekly</th><td>' + props.walking_thriceweekly + '</td></tr>' +
-                '<tr><th>Weekly Greenspace Visits</th><td>' + format_number(props.weekly_greenspace_visits) + '</td></tr>' +
-                '<tr><th>Hospital Experience Score</th><td>' + props.hospital_experience_score + '</td></tr>' +
-                '<tr><th>Can See GP</th><td>' + numeral(100*props.pct_canseegp).format('0,') + '%</td></tr>' +
-                '<tr><th>Dentists / 1000</th><td>' + format_number(props.dentists_per_thousand) + '</td></tr>' +
-                '<tr><th>GP Practices</th><td>' + format_number(props.number_gp_practices) + '</td></tr>' +
-                '<tr><th>GP Practices / 1000</th><td>' + format_number(props.gppractices_per_thousand) + '</td></tr>' +
+                '<table class="table table-extra-condensed table-striped">' +
+                '<tr><th>Cycling Weekly</th><td class="text-right">' + format_number(props.cycling_weekly) + '</td></tr>' +
+                '<tr><th>Walking Thriceweekly</th><td class="text-right">' + props.walking_thriceweekly + '</td></tr>' +
+                '<tr><th>Weekly Greenspace Visits</th><td class="text-right">' + format_number(props.weekly_greenspace_visits) + '</td></tr>' +
+                '<tr><th>Hospital Experience Score</th><td class="text-right">' + props.hospital_experience_score + '</td></tr>' +
+                '<tr><th>Can See GP</th><td class="text-right">' + numeral(100*props.pct_canseegp).format('0,') + '%</td></tr>' +
+                '<tr><th>Dentists / 1000</th><td class="text-right">' + format_number(props.dentists_per_thousand) + '</td></tr>' +
+                '<tr><th>GP Practices</th><td class="text-right">' + format_number(props.number_gp_practices) + '</td></tr>' +
+                '<tr><th>GP Practices / 1000</th><td class="text-right">' + format_number(props.gppractices_per_thousand) + '</td></tr>' +
                 '</table>' +
                 '<i>' + props.LA_code + '</i></div>';
 
