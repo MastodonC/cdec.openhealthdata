@@ -83,7 +83,9 @@ var borough_scores_map = function borough_scores_map(div) {
                 '<tr><th>Weekly Greenspace Visits</th><td>' + format_number(props.weekly_greenspace_visits) + '</td></tr>' +
                 '<tr><th>Hospital Experience Score</th><td>' + props.hospital_experience_score + '</td></tr>' +
                 '<tr><th>Can See GP</th><td>' + numeral(100*props.pct_canseegp).format('0,') + '%</td></tr>' +
-                '<tr><th>Dentists per 1000</th><td>' + format_number(props.dentists_per_thousand) + '</td></tr>' +
+                '<tr><th>Dentists / 1000</th><td>' + format_number(props.dentists_per_thousand) + '</td></tr>' +
+                '<tr><th>GP Practices</th><td>' + format_number(props.number_gp_practices) + '</td></tr>' +
+                '<tr><th>GP Practices / 1000</th><td>' + format_number(props.gppractices_per_thousand) + '</td></tr>' +
                 '</table>' +
                 '<i>' + props.LA_code + '</i></div>';
 
