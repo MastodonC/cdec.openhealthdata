@@ -50,10 +50,9 @@ var diabetes_per_head_per_ccg_per_month = function diabetes_per_head_per_ccg_per
         });
     };
 
-    L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',
+    L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
-            key: 'BC9A493B41014CAABB98F0471D759707'
+            attribution: '&copy; 2011 OpenStreetMap contributors'
         }).addTo(map);
 
     mergedFeatureLayer(map, "data/diabetes_per_head_per_ccg_per_month.csv", "data/ccg-boundaries.json", "ccg_code", style, onEachFeature, pointToLayer, "ccg_boundaries");
@@ -61,13 +60,19 @@ var diabetes_per_head_per_ccg_per_month = function diabetes_per_head_per_ccg_per
     addLegend([0, 16, 18, 20, 22, 24, 26, 28], map, color);
 
     addInfo(map, function (props) {
-        var infoBox = '<h3>Diabetes Spend per CCG</h3><br/>' 
-            + 'CCG name: ' + props.ccg_name + '<br/>'
-            + 'CCG code: ' + props.ccg_code + '<br/>'
-            + 'Registered Patients: ' + numeral(props.registered_patients).format('0,0') + '<br/>'
-            + 'Diabetes Patients: ' + numeral(props.diabetes_patients).format('0,0') + '<br/>'
-            + 'Total Spend: £' + numeral(props.total_spend).format('0,0.00') + '<br/>'
-            + 'Spend per diabetes patient: £' + numeral(props.per_capita_spend).format('0,0.00');
+        var infoBox =
+
+                '<div class="span3"><h4>Diabetes Spend per CCG</h4>' +
+                '<table class="table table-extra-condensed table-striped">' +
+                '<tr><th>CCG name</th><td class="text-right">' + props.ccg_name + '</td></tr>' +
+                '<tr><th>CCG code</th><td class="text-right">' + props.ccg_code + '</td></tr>' +
+                '<tr><th>Registered Patients</th><td class="text-right">' + numeral(props.registered_patients).format('0,0') + '</td></tr>' +
+                '<tr><th>Diabetes Patients:</th><td class="text-right">' + numeral(props.diabetes_patients).format('0,0') + '</td></tr>' +
+                '<tr><th>Total Spend:</th><td class="text-right">£' + numeral(props.total_spend).format('0,0.00') + '</td></tr>' +
+                '<tr><th>Spend per diabetes patient: £</th><td class="text-right">' + numeral(props.per_capita_spend).format('0,0.00') + '</td></tr>' +
+
+                '</table>';
+
         return infoBox;
     });
 

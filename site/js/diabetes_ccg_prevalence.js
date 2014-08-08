@@ -19,7 +19,7 @@ var ccg_diabetes_prevalence_map = function ccg_diabetes_prevalence_map(div_map, 
             color: 'white',
             dashArray: '3',
             fillOpacity: 0.7
-        }
+        };
     };
     var defaultStyle = function defaultstyle(feature) {
         return {
@@ -49,10 +49,9 @@ var ccg_diabetes_prevalence_map = function ccg_diabetes_prevalence_map(div_map, 
         });
     };
 
-    L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',
+    L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
-            key: 'BC9A493B41014CAABB98F0471D759707'
+            attribution: '&copy; 2011 OpenStreetMap contributors'
         }).addTo(map);
 
     mergedFeatureLayer(map, "data/gp_ccg_prevalence.csv", "data/ccg-boundaries.json", "ccg_code", style, onEachFeature, pointToLayer, "ccg_boundaries");
@@ -60,11 +59,13 @@ var ccg_diabetes_prevalence_map = function ccg_diabetes_prevalence_map(div_map, 
     addLegend([0, 1, 3, 5, 7, 9], map, color);
 
     addInfo(map, function (props) {
-        var infoBox = '<h3> CCG Diabetes Prevalence </h3><br/>' +
-            'CCG Name: '+ props.ccg_name +  '<br />' +
-            'CCG Code: ' + props.ccg_code + '<br />' +
-            'Registered Patients: ' + numeral(props.ccg_registered_patients).format('0,0') + '<br />' +
-            'Prevalence: ' + numeral(props.ccg_prevalence).format('0,0.00') + '%<br />';
+        var infoBox = '<div class="span3"><h4> CCG Diabetes Prevalence </h4>' +
+                '<table class="table table-extra-condensed table-striped">' +
+                '<tr><th>CCG Name:</th><td>'+ props.ccg_name +  '</td></tr>' +
+                '<tr><th>CCG Code:</th><td>' + props.ccg_code + '</td></tr>' +
+                '<tr><th>Registered Patients:</th><td>' + numeral(props.ccg_registered_patients).format('0,0') + '</td></tr>' +
+                '<tr><th>Prevalence:</th><td>' + numeral(props.ccg_prevalence).format('0,0.00') + '%</td></tr>' +
+                '</table></div>';
         return infoBox;
     });
 
@@ -93,7 +94,7 @@ var ccg_diabetes_prevalence_map = function ccg_diabetes_prevalence_map(div_map, 
     function zoomToFeature(e) {
         e.target._map.fitBounds(e.target.getBounds());
 
-        if (chart_svg) { chart_svg.remove() };
+        if (chart_svg) { chart_svg.remove(); };
 
         e.target._map.info.update(e.target.feature.properties);
         var ccg_code = e.target.feature.properties.ccg_code;
@@ -119,7 +120,7 @@ var ccg_diabetes_prevalence_map = function ccg_diabetes_prevalence_map(div_map, 
 
             // Override y-axis title
             y.titleShape.text ("% of patients with diabetes");
-            
+
             // Override x-axis title
             x.titleShape.text("GP Surgeries with the highest prevalence");
             // Title is placed below the tick labels by default. This overrides this setting and places it immediately below the axis.

@@ -61,7 +61,7 @@ var borough_scores_map = function borough_scores_map(div) {
 
     L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery.'
+            attribution: '&copy; 2011 OpenStreetMap contributors'
         }).addTo(map);
 
     featureLayer(map, "data/borough_boundaries_topo.json", defaultStyle, "boundaries.geo");

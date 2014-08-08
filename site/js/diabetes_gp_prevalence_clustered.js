@@ -46,9 +46,9 @@ var diabetes_gp_prevalence_map = function diabetes_gp_prevalence_map(div) {
             pointToLayer: pointToLayer
         });
     };
-    var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',
-        cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
-        cloudmade = L.tileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution, key: 'BC9A493B41014CAABB98F0471D759707'}),
+    var cloudmade = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                {maxZoom: 17,
+                                 attribution: '&copy; 2011 OpenStreetMap contributors'}),
         latlng = L.latLng(53.0, -1.5);
 
     var map = L.map(div, {center: latlng, zoom: 6, layers: [cloudmade]});
