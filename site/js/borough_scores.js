@@ -3,17 +3,21 @@ var borough_scores_map = function borough_scores_map(div) {
 
     var map = L.map(div).setView([53.0, -1.5], 6);
     var color = function getColor(d) {
-        return d > 115  ? '#1A9850':
-            d > 65   ? '#91CF60' :
-            d > 15   ? '#D9EF8B' :
-            d > -35  ? '#FEE08B' :
-            d > -85  ? '#D73027' :
-            d > -135 ? '#C62016' :
-            '#BABABA';
+        console.log("D:" + d);
+        switch (d) {
+            case 'A': return '#1A9850' ;;
+            case 'B': return '#91CF60';;
+            case 'C': return '#D9EF8B';;
+            case 'D': return '#FEE08B';;
+            case 'E': return '#D73027';;
+            case 'F': return '#C62016';;
+            default : return '#555555';;
+        };
     };
+
     var style = function style(feature) {
         return {
-            fillColor: color(feature.properties.overall_rank),
+            fillColor: color(feature.properties.overall_grade),
             weight: 1,
             dashArray: '3',
             opacity: 0,
@@ -65,7 +69,7 @@ var borough_scores_map = function borough_scores_map(div) {
 
     mergedFeatureLayer(map, "data/borough_scores.csv", "data/borough_boundaries_topo.json", "LA_code", style, onEachFeature, pointToLayer, "boundaries.geo");
 
-    addLegend([-134, -84, -34, 16, 66, 116, 166], map, color);
+    addCategoricalLegend(['F', 'E', 'D', 'C', 'B', 'A'], map, color);
 
     addInfo(map, function (props) {
         var infoBox = '<div class="span3"><h4>' + props.LA_name + '</h4>' +
