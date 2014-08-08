@@ -6,7 +6,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CDEC Open Health Data Platform | Toothpick</title>
+  <title>CDEC Open Health Data Platform | Diabetes</title>
   <link href="/css/cdec-bootstrap-blue.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
   <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -16,16 +16,36 @@
 
   <script src="http://d3js.org/d3.v3.js"></script>
   <style>
-    #borough_scores_map {
-            width: 100%;
+    #spendmap {
+            width: 600px;
             height: 600px;
             margin: 0px 20px;
       }
+    #prevalencemap {
+            width: 600px;
+            height: 600px;
+            margin: 0px 20px;
+      }
+    #spendchart {
+        width: 600px;
+        height: 320px;
+        margin: 0px 20px;
+    }
+    #spendcomparison {
+        width: 600px;
+        height: 320px;
+        margin: 0px 20px;
+    }
+    #totalspend {
+        width: 600px;
+        height: 300px;
+        margin: 0px 20px;
     }
   </style>
 </head>
 
 <body>
+
   <nav>
     <div class="navbar navbar-inverse navbar-static-top" id="topbar">
       <div class="container">
@@ -37,7 +57,7 @@
         </div>
       </div>
     </div>
-    </nav>
+  </nav>
 
     <div class="navbar navbar-static-top" id="mainnav">
       <div class="container">
@@ -61,7 +81,7 @@
       </div>
     </div>
 
-    <div class="whiteout">
+  <div class="whiteout">
     <header>
       <div class="container">
         <h1>Home</h1>
@@ -70,22 +90,52 @@
 
     <div class="container main-default" id="main">
       <ul id="project-tabs" class="nav nav-tabs" role="tablist"></ul>
-
       <div class="row">
         <div class="jumbotron span12">
-          <h2>About this study
-          </h2>
-          <p class="lead">
-          We know that it's much easier to stay healthy in some places than in others. Health is a result of so many factors - including whether we can build exercise into our daily lives (for example, by walking), whether it's easy to get out to green space, and
-          whether we can access good health services like GPs, hospitals, and dentists in order to maintain our health. The map below shows our attempt to measure up which places are best and worst to be in that respect. It takes multiple sources of open data, puts them together at a local authority level, and then ranks the areas according to these multiple factors.
-          Hover over your area to see how it scores on all of these aspects - the best areas are marked green, and the worst are marked red. </p>
+          <h2>Over <strong>2.4 million people</strong> in England or about <strong>5.5%</strong> have diabetes. On average <strong>£24.45</strong> is spent per diabetes patient per month on prescriptions to treat their condition.</h2>
+          <p class="lead">This site takes data from sources like
+          the <a href="http://www.hscic.gov.uk/">Health and Social
+          Care Information Centre (HSCIC)</a> and shows how it can be
+          turned into visualisations and analysis to answer specific
+          questions for your organisation. This is data science example, which shows how to take a small number of datasets including data about GP prescriptions and diabetes prevalence to show the extent of diabetes treatment in the UK.</p>
         </div>
         <div class="span12">
           <div class="span7 offset4">
-            <h2>Where is it easiest to be healthy?</h2>
+            <h2>Spend per diabetes patient</h2>
           </div>
-        <div class="span12"><div id="borough_scores_map"></div></div>
-      </div>
+          <div class="span4">
+            <p>This chart shows how much money is spent on prescriptions for diabetes patients per month. The data is at the Clinical Commissioning Group (CCG) level, which is the way GP Surgeries have organised in England since 1 April 2013.</p>
+
+            <p>The amount spent per diabetes patient ranges from roughly £18 to £31 per month.</p>
+          </div>
+          <div class="span7">
+            <div id="spendmap"></div>
+          </div>
+        </div>
+        <div class="span12">
+          <h2>Difference in spending month by month</h2>
+          <p>Click on a CCG area on a map above to see the time series.</p>
+        </div>
+        <div class="span6">
+          <div id="spendchart"></div>
+        </div>
+        <div class="span6">
+          <div id="spendcomparison"></div>
+        </div>
+        <div class="span12"><h2>Total spend across England</h2></div>
+        <div class="span12">
+          <div id="totalspend"></div>
+        </div>
+        <div class="span12">
+          <div class="span7 offset4">
+            <h2>Diabetes Prevalence</h2>
+          </div>
+          <div class="span4">
+            <p>This chart shows what percentage of people in a CCG have diabetes. About 5.5% of people in England have diabetes, but the prevalence in a particular area can be from 3% to over 9%.</p>
+            <p>Clicking on a CCG in the map will show the GP Surgeries with the highest prevalence of diabetes in that CCG below.</p>
+            <div id="gp_prevalence"></div></div>
+          <div class="span7"><div id="prevalencemap"></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -129,8 +179,6 @@
   <script src="http://underscorejs.org/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
 
-  <script src="js/tabs.js"></script>
-
   <!-- leaflet -->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
@@ -140,12 +188,30 @@
 
   <!-- sugar -->
   <script src="js/mapProcessing.js"></script>
+  <script src="js/chart_sugar.js"></script>
   <link href="css/charts.css" rel="stylesheet" type="text/css">
   <link href="css/legend.css" rel="stylesheet" type="text/css">
   <!-- spend per ccg map -->
-  <script src="js/borough_scores.js"></script>
+  <script src="js/diabetes-per-head-per-ccg-per-month.js"></script>
+  <!-- CCG Spend per capita per month -->
+  <script src="js/diabetes_spend_month_by_month.js"></script>
+  <!-- CCG Spend comparison with previous year -->
+  <script src="js/diabetes_spend_comparison.js"></script>
+  <!-- top and bottom 10 -->
+  <script src="js/diabetes_ccg_ranking.js"></script>
+  <!-- Total spend across England -->
+  <script src="js/diabetes_total_spend.js"></script>
+  <!-- CCG Prevalence Map -->
+  <script src="js/diabetes_ccg_prevalence.js"></script>
+  <!-- put it all on a page -->
+  <script src="js/tabs.js"></script>
+  <!-- put it all on a page -->
+
   <script type="text/javascript">
-    borough_scores_map('borough_scores_map');
+    diabetes_per_head_per_ccg_per_month('spendmap', '#spendchart', '#spendcomparison');
+    ccg_diabetes_prevalence_map('prevalencemap', '#gp_prevalence');
+    total_spend("#totalspend");
+
     render_tabs();
   </script>
 </body>
