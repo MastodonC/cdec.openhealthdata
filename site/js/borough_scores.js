@@ -2,14 +2,16 @@
 var borough_scores_map = function borough_scores_map(div) {
 
     var map = L.map(div).setView([53.0, -1.5], 6);
+
+    // colors from http://colorbrewer2.org/
     var color = function getColor(d) {
         switch (d) {
-            case 'A': return '#0C2C84' ;;
-            case 'B': return '#225EA8' ;;
-            case 'C': return '#1D91C0' ;;
-            case 'D': return '#41B6C4' ;;
-            case 'E': return '#7FCDBB' ;;
-            case 'F': return '#C7E9B4' ;;
+            case 'F': return '#feebe2' ;;
+            case 'E': return '#fcc5c0' ;;
+            case 'D': return '#fa9fb5' ;;
+            case 'C': return '#f768a1' ;;
+            case 'B': return '#c51b8a' ;;
+            case 'A': return '#7a0177' ;;
             default : return '#555555';;
         };
     };
@@ -27,7 +29,7 @@ var borough_scores_map = function borough_scores_map(div) {
         return {
             outlineColor: "#000000",
             outlineWidth: 0.5,
-            color : 'white',
+            color : 'black',
             weight: 1,
             opacity: 1,
             fillOpacity: 0
