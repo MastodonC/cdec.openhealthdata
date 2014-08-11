@@ -82,6 +82,7 @@ var borough_scores_map = function borough_scores_map(div) {
                 '</table>' +
                 '<table class="table table-extra-condensed table-striped">' +
                 '<tr><th>Cycling Weekly</th><td class="text-right">' + format_number(props.cycling_weekly) + '</td></tr>' +
+                '<tr><th>Barclays Cycle Hire Stations<sup>†</sup></th><td class="text-right">' + props.public_bike_docks + '</td></tr>' +
                 '<tr><th>Walking Thriceweekly</th><td class="text-right">' + props.walking_thriceweekly + '</td></tr>' +
                 '<tr><th>Weekly Greenspace Visits</th><td class="text-right">' + format_number(props.weekly_greenspace_visits) + '</td></tr>' +
                 '<tr><th>Hospital Experience Score</th><td class="text-right">' + props.hospital_experience_score + '</td></tr>' +
@@ -90,7 +91,10 @@ var borough_scores_map = function borough_scores_map(div) {
                 '<tr><th>GP Practices</th><td class="text-right">' + format_number(props.number_gp_practices) + '</td></tr>' +
                 '<tr><th>GP Practices / 1000</th><td class="text-right">' + format_number(props.gppractices_per_thousand) + '</td></tr>' +
                 '</table>' +
-                '<i>' + props.LA_code + '</i></div>';
+                '<small><div>' +
+                '<i>' + props.LA_code + '</i></div>' +
+                '<div><sup>†</sup>&nbsp;Powered by TfL Open Data</div>' +
+                '</small>';
 
         return infoBox;
     });
