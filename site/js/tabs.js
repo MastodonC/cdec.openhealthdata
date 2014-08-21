@@ -2,7 +2,7 @@
 var render_tabs = function render_tabs() {
 
     var tabs= [ {"name": "Diabetes", "pathname": "/diabetes.html"},
-                {"name": "Toothpick", "pathname": "/toothpick.html"} ];
+                {"name": "Healthy Places", "pathname": "/toothpick.html"} ];
 
     var add_click = function add_click(name, pathname) {
         $('#' + name).click(function (e) {
