@@ -4,7 +4,7 @@ Connected Digital Economy Catapult
 
 ## Usage
 
-Visit the website: http://openhealthdata.cdehub.org
+Visit the website: http://www.cde.org.uk/health/examples
 
 or fire up your clojure repl. We prefer emacs for that.
 
@@ -13,4 +13,3 @@ or fire up your clojure repl. We prefer emacs for that.
 Copyright © 2014 Connected Digital Economy Catapult
 
 Distributed under the Apache v2 License
-
