@@ -174,7 +174,7 @@ function addLegend(gradesParam, map, color) {
 
 
 function addCategoricalLegend(categories, map, categoricalColor) {
-    var legend = L.control({position: 'bottomright'});
+    var legend = L.control({position: 'bottomleft'});
 
     legend.onAdd = function (map) {
 

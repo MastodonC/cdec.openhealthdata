@@ -50,10 +50,9 @@ var registered_in_ccg = function registered_in_ccg(div) {
         });
     };
 
-    L.tileLayer('http://{s}.tile.cloudmade.com/{key}/22677/256/{z}/{x}/{y}.png',
+    L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
-            key: 'BC9A493B41014CAABB98F0471D759707'
+            attribution: '&copy; 2011 OpenStreetMap contributors'
         }).addTo(map);
 
     mergedFeatureLayer(map, "data/registered_in_ccg.csv", "data/ccg-boundaries.json", "ccg_code", style, onEachFeature, pointToLayer, "ccg_boundaries");
